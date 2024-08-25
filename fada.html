@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosya İndirme Sayfası</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dosya İndirme Sayfası</h1>
+        <p>Bu butona tıklayarak <strong>greekcatsarefake.py</strong> dosyasını indirebilirsiniz.</p>
+        <button id="downloadButton">Dosyayı İndir</button>
+    </div>
+
+    <script>
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            const url = 'https://raw.githubusercontent.com/insidai/myrepos/main/greekcatsarefake.py';
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'blob';
+            xhr.onload = function() {
+                const blob = new Blob([xhr.response], { type: 'application/octet-stream' });
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'greekcatsarefake.py';
+                link.click();
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
